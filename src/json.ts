@@ -30,8 +30,8 @@ export interface JsonH {
 }
 
 /** Turns Json types into Hashed Json types */
-export type H<T extends Json> = {
-  [K in keyof T]: T[K] extends Json ? H<T[K]> : T[K];
+export type Hashed<T extends Json> = {
+  [K in keyof T]: T[K] extends Json ? Hashed<T[K]> : T[K];
 } & { _hash: string };
 
 // .............................................................................
@@ -41,7 +41,7 @@ export interface ExampleJson extends Json {
 }
 
 /** An example json type with hashes */
-export type ExampleJSonH = H<ExampleJson>;
+export type ExampleJSonH = Hashed<ExampleJson>;
 
 /** An example json object without hashes */
 export const exampleJson: Readonly<ExampleJson> = { a: { b: 1 } };
