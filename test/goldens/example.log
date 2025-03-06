@@ -1,0 +1,30 @@
+
+JsonValue can be all JSON types
+  Number: 10
+  String: hello
+  Boolean: true
+  Null: null
+  Json: {"a":{"b":1}}
+
+JsonValueH deeply enforces _hash properties for Json dictionaries
+  JsonH: {"a":{"b":1,"_hash":"hash1"},"_hash":"hash0"}
+
+JsonArray is array of json values
+  Number array: 1,2,3,4,5
+  String array: hello,world
+  Boolean array: true,false
+  Null array: ,
+  Json array: [{"a":{"b":1}}]
+
+JsonArrayH enforces hashes in Json dictionaries
+  JsonH array: [{"a":{"b":1,"_hash":"hash1"},"_hash":"hash0"}]
+
+Json
+  numbers: {"a":1}
+  strings: {"b":"hello"}
+  booleans: {"c":true}
+  nulls: {"d":null}
+  nested: {"e":{"f":{"g":1}}}
+
+JsonH deeply enforces _hash properties for Json dictionaries
+  numbers: {"a":1,"_hash":"hash1","b":{"c":"hello","_hash":"hash2"}}
