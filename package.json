@@ -43,6 +43,9 @@
     "vitest": "^3.0.7",
     "vitest-dom": "^0.1.1"
   },
-  "peerDependencies": {},
-  "dependencies": {}
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }
