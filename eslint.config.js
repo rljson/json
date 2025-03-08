@@ -1,3 +1,4 @@
+import jsdoc from 'eslint-plugin-jsdoc';
 import tsdoc from 'eslint-plugin-tsdoc';
 import tseslint from 'typescript-eslint';
 
@@ -14,18 +15,21 @@ export default [
     rules: {
       // Typescript rules
       '@typescript-eslint/no-explicit-any': 'off',
-
-      // Enforce ; at the end of the line
-      semi: ['error', 'always'],
     },
   },
 
   // Configure tsdoc
   {
     files: ['src/**/*.ts'],
-    plugins: { tsdoc },
+    plugins: { tsdoc, jsdoc, tseslint },
     rules: {
       'tsdoc/syntax': 'error',
+      ...jsdoc.configs['flat/recommended-typescript-flavor-error'].rules,
+      'jsdoc/require-description': 'error',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-jsdoc': 'error',
+      'jsdoc/require-returns-type': 'off',
+      'jsdoc/require-returns': 'off',
     },
   },
 
