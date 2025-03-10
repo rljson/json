@@ -7,8 +7,9 @@
 import { isBasicType } from './is-basic-type.ts';
 import { Json, JsonArray } from './json.ts';
 
+
 // ...........................................................................
-export const copy = (json: Json): Json => {
+export const copy = <T extends Json>(json: T): T => {
   const result: Json = {};
   for (const [key, value] of Object.entries(json)) {
     if (value === null) {
@@ -23,11 +24,11 @@ export const copy = (json: Json): Json => {
       throw new Error(`Unsupported type: ${typeof value}`);
     }
   }
-  return result;
+  return result as T;
 };
 
 // ...........................................................................
-export const copyList = (list: JsonArray): JsonArray => {
+export const copyList = <T extends JsonArray>(list: JsonArray): T => {
   const result: JsonArray = [];
   for (const element of list) {
     if (element == null) {
@@ -42,5 +43,5 @@ export const copyList = (list: JsonArray): JsonArray => {
       throw new Error(`Unsupported type: ${typeof element}`);
     }
   }
-  return result;
+  return result as T;
 };
