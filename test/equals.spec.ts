@@ -64,4 +64,24 @@ describe('equals', () => {
     expect(equals({ a: [1, { b: 2 }] }, { a: [1, { b: 3 }] })).toBe(false);
     expect(equals([[1, 2], { a: 3 }], [[1, 2], { a: 4 }])).toBe(false);
   });
+
+  describe('with option', () => {
+    describe('ignoreHashes', () => {
+      describe('true', () => {
+        it('should ignore _hash properties when comparing objects', () => {
+          const a = { a: 1, _hash: 'hash' };
+          const b = { a: 1, _hash: 'different' };
+          expect(equals(a, b, { ignoreHashes: true })).toBe(true);
+        });
+      });
+
+      describe('false', () => {
+        it('should not ignore _hash properties when comparing objects', () => {
+          const a = { a: 1, _hash: 'hash' };
+          const b = { a: 1, _hash: 'different' };
+          expect(equals(a, b, { ignoreHashes: false })).toBe(false);
+        });
+      });
+    });
+  });
 });
