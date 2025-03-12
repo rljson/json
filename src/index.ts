@@ -15,4 +15,5 @@ export {
 } from './json.ts';
 
 export { copy, copyList } from './copy.ts';
+export { equals } from './equals.ts';
 export { isBasicType } from './is-basic-type.ts';
