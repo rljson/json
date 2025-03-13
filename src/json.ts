@@ -51,3 +51,27 @@ export const exampleJsonH: Readonly<ExampleJSonH> = {
   a: { b: 1, _hash: 'hash1' },
   _hash: 'hash0',
 };
+
+// .............................................................................
+// Example json values
+
+export const exampleJsonObject = () => {
+  return {
+    int: 5,
+    double: 5.5,
+    string: 'a',
+    boolean: true,
+    null: null,
+    array: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
+    object: { a: 1, b: { c: 2 } },
+  };
+};
+
+export const exampleJsonArray = (): JsonArray => [
+  1,
+  'a',
+  true,
+  null,
+  [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
+  exampleJsonObject(),
+];

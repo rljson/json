@@ -40,10 +40,10 @@
 ### Check out
 
 ```bash
-mkdir rljson
-cd rljson
-git clone https://github.com/rljson/json.git
+mkdir json
 cd json
+git clone https://github.com/rljson/json.git
+cd io
 ```
 
 ### Install pnpm
@@ -118,11 +118,11 @@ git pull
 
 ### Create a branch
 
-Replace the value assigned to `MESSAGE` in the next command.
-It will also used for branch name and pull request.
+Please replace `Commit Message` in the next command by your commit message.
+It will also used for branch name and pull request
 
 ```bash
-export MESSAGE="Add more json methods" && \
+export MESSAGE="Add example json values" && \
 export BRANCH=`echo "$MESSAGE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_]/_/g'` &&\
 git checkout -b $BRANCH
 ```
@@ -163,6 +163,8 @@ Develop your feature
 
 Commit your changes
 
+If you only have one thing, execute
+
 ```bash
 git commit -am"$MESSAGE"
 ```
@@ -196,10 +198,12 @@ gh pr merge --auto --squash
 Get the PR URL with the following command
 
 ```bash
-gh pr view --json url -q .url
+echo -e "\033[34m$(gh pr view --json url | jq -r '.url')\033[0m"
+echo "Wait until PR is closed ..." && \
+until gh pr view --json closed | jq -e '.closed == true' >/dev/null; do
+  sleep 2 >/dev/null;
+done;
 ```
-
-Visit it
 
 ### Delete feature branch
 
