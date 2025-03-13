@@ -8,18 +8,12 @@ import { JsonValue } from './json.ts';
 
 
 /**
- * Returns true if a and b are deeply equal
+ * Returns true if a and b are deeply equal also evaluating the _hash property
  * @param a - The first value to compare
  * @param b - The second value to compare
- * @param options - Options for the comparison
- * @param options.ignoreHashes - If true, ignores _hash properties when comparing objects
  * @returns true if a and b are deeply equal
  */
-export const equals = (
-  a: JsonValue,
-  b: JsonValue,
-  options: { ignoreHashes: boolean } = { ignoreHashes: false },
-): boolean => {
+export const equals = (a: JsonValue, b: JsonValue): boolean => {
   if (a === b) {
     return true;
   }
@@ -51,14 +45,26 @@ export const equals = (
   }
 
   if (a instanceof Object && b instanceof Object) {
+    const aHash = (a as any)._hash;
+    const bHash = (b as any)._hash;
+    if (aHash && bHash) {
+      return aHash === bHash;
+    }
+
     const keys = Object.keys(a);
     let aKeys = keys;
     let bKeys = Object.keys(b);
 
-    if (options.ignoreHashes) {
+    if (aHash) {
       aKeys = aKeys.filter((key) => key !== '_hash');
+    }
+
+    if (bHash) {
       bKeys = bKeys.filter((key) => key !== '_hash');
     }
+
+    aKeys = aKeys.filter((key) => key !== '_hash');
+    bKeys = bKeys.filter((key) => key !== '_hash');
 
     if (aKeys.length !== bKeys.length) {
       return false;
