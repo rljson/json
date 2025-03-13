@@ -7,9 +7,17 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  exampleJson, exampleJsonH, Json, JsonArray, JsonArrayH, JsonH, JsonValue, JsonValueH
+  exampleJson,
+  exampleJsonArray,
+  exampleJsonH,
+  exampleJsonObject,
+  Json,
+  JsonArray,
+  JsonArrayH,
+  JsonH,
+  JsonValue,
+  JsonValueH,
 } from '../src/json';
-
 
 describe('json', () => {
   describe('without hash', () => {
@@ -195,6 +203,35 @@ describe('json', () => {
           a: { b: 1, _hash: 'hash1' },
           _hash: 'hash0',
         });
+      });
+    });
+  });
+
+  describe('examples', () => {
+    describe('examplJsonValue()', () => {
+      it('returns a JSON value containing all upported data types', () => {
+        expect(exampleJsonObject()).toEqual({
+          int: 5,
+          double: 5.5,
+          string: 'a',
+          boolean: true,
+          null: null,
+          array: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
+          object: { a: 1, b: { c: 2 } },
+        });
+      });
+    });
+
+    describe('exampleJsonArray()', () => {
+      it('returns a JSON array containing all supported data types', () => {
+        expect(exampleJsonArray()).toEqual([
+          1,
+          'a',
+          true,
+          null,
+          [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
+          exampleJsonObject(),
+        ]);
       });
     });
   });
