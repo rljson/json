@@ -41,7 +41,11 @@ export type JsonBasicValueType = (typeof jsonBasicValueTypes)[number];
 /**
  * An array containing the complex json value types
  */
-export const jsonComplexValueTypes = ['json', 'jsonArray'] as const;
+export const jsonComplexValueTypes = [
+  'json',
+  'jsonArray',
+  'jsonValue',
+] as const;
 
 /**
  * A complex json value type
