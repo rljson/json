@@ -27,7 +27,7 @@ describe('JsonValue', () => {
   });
 
   it('jsonComplexValueTypes', () => {
-    expect(jsonComplexValueTypes).toEqual(['object', 'array']);
+    expect(jsonComplexValueTypes).toEqual(['json', 'jsonArray']);
   });
 
   it('jsonValueTypes', () => {
@@ -36,8 +36,8 @@ describe('JsonValue', () => {
       'number',
       'boolean',
       'null',
-      'object',
-      'array',
+      'json',
+      'jsonArray',
     ]);
   });
 
@@ -54,11 +54,11 @@ describe('JsonValue', () => {
     it('null', () => {
       expect(jsonValueType(null)).toBe('null');
     });
-    it('object', () => {
-      expect(jsonValueType({ key: 'value' })).toBe('object');
+    it('json', () => {
+      expect(jsonValueType({ key: 'value' })).toBe('json');
     });
-    it('array', () => {
-      expect(jsonValueType(['hello'])).toBe('array');
+    it('jsonArray', () => {
+      expect(jsonValueType(['hello'])).toBe('jsonArray');
     });
     it('other', () => {
       expect(() => jsonValueType(new Date(18908290) as any)).toThrow(
@@ -81,7 +81,7 @@ describe('JsonValue', () => {
 
       it('when an array does not contain valid JSON', () => {
         const invalid = exampleJsonObject();
-        (invalid['array'] as Array<any>).push(new Date(0));
+        (invalid['jsonArray'] as Array<any>).push(new Date(0));
         expect(() => validateJsonValue(invalid as any)).toThrow(
           'Invalid json type Date; value: "1970-01-01T00:00:00.000Z"',
         );
@@ -89,7 +89,7 @@ describe('JsonValue', () => {
 
       it('when an object does not contain valid JSON', () => {
         const invalid = exampleJsonObject();
-        invalid['object']!['data'] = new Date(0);
+        invalid['json']!['data'] = new Date(0);
         expect(() => validateJsonValue(invalid as any)).toThrow(
           'Invalid json type Date; value: "1970-01-01T00:00:00.000Z"',
         );

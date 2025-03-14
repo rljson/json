@@ -41,7 +41,7 @@ export type JsonBasicValueType = (typeof jsonBasicValueTypes)[number];
 /**
  * An array containing the complex json value types
  */
-export const jsonComplexValueTypes = ['object', 'array'] as const;
+export const jsonComplexValueTypes = ['json', 'jsonArray'] as const;
 
 /**
  * A complex json value type
@@ -76,8 +76,8 @@ export const jsonValueType = (value: JsonValue): JsonValueType => {
       return 'boolean';
     case 'object':
       if (value === null) return 'null';
-      if (Array.isArray(value)) return 'array';
-      if (Object.getPrototypeOf(value) === Object.prototype) return 'object';
+      if (Array.isArray(value)) return 'jsonArray';
+      if (Object.getPrototypeOf(value) === Object.prototype) return 'json';
       throw new Error(
         `Invalid json type ${value.constructor.name}; value: ${JSON.stringify(
           value,
