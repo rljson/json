@@ -4,9 +4,9 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
-import { isBasicType } from './is-basic-type.ts';
-import { Json, JsonArray } from './json.ts';
-
+import { JsonArray } from './json-array.ts';
+import { isBasicType } from './json-value.ts';
+import { Json } from './json.ts';
 
 // ...........................................................................
 export const copy = <T extends Json>(json: T): T => {
