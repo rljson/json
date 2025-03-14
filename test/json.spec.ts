@@ -10,6 +10,8 @@ import { exampleJson, exampleJsonObject, Json } from '../src/json';
 import { exampleJsonArray } from '../src/json-array';
 import { JsonValue } from '../src/json-value';
 
+import { expectGolden } from './setup/goldens';
+
 describe('json', () => {
   describe('without hash', () => {
     describe('JsonValue', () => {
@@ -76,15 +78,7 @@ describe('json', () => {
   describe('examples', () => {
     describe('examplJsonValue()', () => {
       it('returns a JSON value containing all upported data types', () => {
-        expect(exampleJsonObject()).toEqual({
-          int: 5,
-          double: 5.5,
-          string: 'a',
-          boolean: true,
-          null: null,
-          array: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
-          object: { a: 1, b: { c: 2 } },
-        });
+        expectGolden('json/example-json-object.json').toBe(exampleJsonObject());
       });
     });
 
