@@ -36,7 +36,7 @@ export const exampleJsonObject = (): Json => {
     string: 'a',
     boolean: true,
     null: null,
-    array: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
-    object: { a: 1, b: { c: 2 } },
+    jsonArray: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
+    json: { a: 1, b: { c: 2 } },
   } as const;
 };
