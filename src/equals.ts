@@ -4,8 +4,7 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
-import { JsonValue } from './json.ts';
-
+import { JsonValue } from './json-value.ts';
 
 /**
  * Returns true if a and b are deeply equal also evaluating the _hash property
