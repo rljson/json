@@ -27,7 +27,7 @@ describe('JsonValue', () => {
   });
 
   it('jsonComplexValueTypes', () => {
-    expect(jsonComplexValueTypes).toEqual(['json', 'jsonArray']);
+    expect(jsonComplexValueTypes).toEqual(['json', 'jsonArray', 'jsonValue']);
   });
 
   it('jsonValueTypes', () => {
@@ -38,6 +38,7 @@ describe('JsonValue', () => {
       'null',
       'json',
       'jsonArray',
+      'jsonValue',
     ]);
   });
 

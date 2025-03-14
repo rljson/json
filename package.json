@@ -1,6 +1,6 @@
 {
   "name": "@rljson/json",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Basic json types, i. e. `Json`, `JsonValue`, `JsonArray`, ...",
   "homepage": "https://github.com/rljson/json",
   "bugs": "https://github.com/rljson/json/issues",
