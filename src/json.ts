@@ -11,9 +11,6 @@ export interface Json {
   [key: string]: JsonValue;
 }
 
-/** A deeply hashed JSON array */
-export type JsonArrayH = Array<JsonValueH>;
-
 /** A deeply hashed JSON object */
 export interface JsonH {
   [key: string]: JsonValueH;
