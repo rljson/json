@@ -1,6 +1,6 @@
 {
   "name": "@rljson/json",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Basic json types, i. e. `Json`, `JsonValue`, `JsonArray`, ...",
   "homepage": "https://github.com/rljson/json",
   "bugs": "https://github.com/rljson/json/issues",
@@ -39,7 +39,7 @@
     "globals": "^16.0.0",
     "typescript": "~5.8.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.2.1",
+    "vite": "^6.2.2",
     "vite-node": "^3.0.8",
     "vite-plugin-dts": "^4.5.3",
     "vite-tsconfig-paths": "^5.1.4",

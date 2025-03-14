@@ -8,6 +8,60 @@
 /** A value that can be assigned to a property in a json dictionary */
 export type JsonValue = string | number | boolean | null | Json | JsonArray;
 
+export const basicValueTypes = ['string', 'number', 'boolean', 'null'] as const;
+
+export type BasicValueType = (typeof basicValueTypes)[number];
+
+export const complexValueTypes = ['object', 'array'] as const;
+
+export type ComplexValueType = (typeof complexValueTypes)[number];
+
+export const jsonTypes = [...basicValueTypes, ...complexValueTypes] as const;
+
+export type ValueType = BasicValueType | ComplexValueType;
+
+/**
+ * Returns the type of a json value
+ * @param value The json value
+ * @returns The type of the json value
+ */
+export const jsonValueType = (value: JsonValue): ValueType => {
+  switch (typeof value) {
+    case 'string':
+      return 'string';
+    case 'number':
+      return 'number';
+    case 'boolean':
+      return 'boolean';
+    case 'object':
+      if (value === null) return 'null';
+      if (Array.isArray(value)) return 'array';
+      if (Object.getPrototypeOf(value) === Object.prototype) return 'object';
+      throw new Error(
+        `Invalid json type ${value.constructor.name}; value: ${JSON.stringify(
+          value,
+        )}`,
+      );
+  }
+};
+
+/**
+ * Throws when the value is not a valid json value
+ * @param value The json value to be validated
+ */
+export const validateJsonValue = (value: JsonValue): void => {
+  const type = jsonValueType(value);
+  if (basicValueTypes.includes(type as any)) {
+    return;
+  }
+
+  for (const key in value as any) {
+    validateJsonValue((value as any)[key] as any);
+  }
+};
+
+// .............................................................................
+
 /** An array that can be assigned to a property in a json dictionary */
 export type JsonArray = Array<JsonValue>;
 
@@ -55,7 +109,7 @@ export const exampleJsonH: Readonly<ExampleJSonH> = {
 // .............................................................................
 // Example json values
 
-export const exampleJsonObject = () => {
+export const exampleJsonObject = (): Json => {
   return {
     int: 5,
     double: 5.5,
@@ -64,7 +118,7 @@ export const exampleJsonObject = () => {
     null: null,
     array: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
     object: { a: 1, b: { c: 2 } },
-  };
+  } as const;
 };
 
 export const exampleJsonArray = (): JsonArray => [
