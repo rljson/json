@@ -6,100 +6,11 @@
 
 import { describe, expect, it } from 'vitest';
 
-import {
-  basicValueTypes,
-  complexValueTypes,
-  exampleJson,
-  exampleJsonArray,
-  exampleJsonH,
-  exampleJsonObject,
-  Json,
-  JsonArray,
-  JsonArrayH,
-  JsonH,
-  jsonTypes,
-  JsonValue,
-  JsonValueH,
-  jsonValueType,
-  validateJsonValue,
-} from '../src/json';
+import { exampleJson, exampleJsonObject, Json } from '../src/json';
+import { exampleJsonArray } from '../src/json-array';
+import { JsonValue } from '../src/json-value';
 
 describe('json', () => {
-  it('basicTypes', () => {
-    expect(basicValueTypes).toEqual(['string', 'number', 'boolean', 'null']);
-  });
-
-  it('complexTypes', () => {
-    expect(complexValueTypes).toEqual(['object', 'array']);
-  });
-
-  it('jsonTypes', () => {
-    expect(jsonTypes).toEqual([
-      'string',
-      'number',
-      'boolean',
-      'null',
-      'object',
-      'array',
-    ]);
-  });
-
-  describe('jsonValueType(value)', () => {
-    it('string', () => {
-      expect(jsonValueType('hello')).toBe('string');
-    });
-    it('number', () => {
-      expect(jsonValueType(10)).toBe('number');
-    });
-    it('boolean', () => {
-      expect(jsonValueType(true)).toBe('boolean');
-    });
-    it('null', () => {
-      expect(jsonValueType(null)).toBe('null');
-    });
-    it('object', () => {
-      expect(jsonValueType({ key: 'value' })).toBe('object');
-    });
-    it('array', () => {
-      expect(jsonValueType(['hello'])).toBe('array');
-    });
-    it('other', () => {
-      expect(() => jsonValueType(new Date(18908290) as any)).toThrow(
-        'Invalid json type Date; value: "1970-01-01T05:15:08.290Z"',
-      );
-    });
-  });
-
-  describe('validateJsonValue(value)', () => {
-    it('returns normally when the value is valid JSON', () => {
-      expect(() => validateJsonValue(exampleJsonObject())).not.toThrow();
-    });
-
-    describe('throws when the value is not valid JSON', () => {
-      it('when the value itself is not valid', () => {
-        expect(() => validateJsonValue(new Date(0) as any)).toThrow(
-          'Invalid json type Date; value: "1970-01-01T00:00:00.000Z"',
-        );
-      });
-
-      it('when an array does not contain valid JSON', () => {
-        const invalid = exampleJsonObject();
-        (invalid['array'] as Array<any>).push(new Date(0));
-        expect(() => validateJsonValue(invalid as any)).toThrow(
-          'Invalid json type Date; value: "1970-01-01T00:00:00.000Z"',
-        );
-      });
-
-      it('when an object does not contain valid JSON', () => {
-        const invalid = exampleJsonObject();
-        invalid['object']!['data'] = new Date(0);
-        expect(() => validateJsonValue(invalid as any)).toThrow(
-          'Invalid json type Date; value: "1970-01-01T00:00:00.000Z"',
-        );
-      });
-    });
-  });
-
   describe('without hash', () => {
     describe('JsonValue', () => {
       it('string', () => {
@@ -125,33 +36,6 @@ describe('json', () => {
       it('Json', () => {
         const val: JsonValue = { key: 'value' };
         expect(val).toEqual({ key: 'value' });
-      });
-    });
-
-    describe('JsonArray', () => {
-      it('string', () => {
-        const val: JsonArray = ['hello'];
-        expect(val).toEqual(['hello']);
-      });
-
-      it('number', () => {
-        const val: JsonArray = [10];
-        expect(val).toEqual([10]);
-      });
-
-      it('boolean', () => {
-        const val: JsonArray = [true];
-        expect(val).toEqual([true]);
-      });
-
-      it('null', () => {
-        const val: JsonArray = [null];
-        expect(val).toEqual([null]);
-      });
-
-      it('Json', () => {
-        const val: JsonArray = [{ key: 'value' }];
-        expect(val).toEqual([{ key: 'value' }]);
       });
     });
 
@@ -185,104 +69,6 @@ describe('json', () => {
     describe('ExampleJson', () => {
       it('provides an example json object', () => {
         expect(exampleJson).toEqual({ a: { b: 1 } });
-      });
-    });
-  });
-
-  describe('with hash', () => {
-    describe('JsonValueH', () => {
-      it('string', () => {
-        const val: JsonValueH = 'hello';
-        expect(val).toBe('hello');
-      });
-
-      it('number', () => {
-        const val: JsonValueH = 10;
-        expect(val).toBe(10);
-      });
-
-      it('boolean', () => {
-        const val: JsonValueH = true;
-        expect(val).toBe(true);
-      });
-
-      it('null', () => {
-        const val: JsonValueH = null;
-        expect(val).toBe(null);
-      });
-
-      it('Json', () => {
-        const val: JsonValueH = { key: 'value', _hash: 'hash' };
-        expect(val).toEqual({ key: 'value', _hash: 'hash' });
-      });
-    });
-
-    describe('JsonArrayH', () => {
-      it('string', () => {
-        const val: JsonArrayH = ['hello'];
-        expect(val).toEqual(['hello']);
-      });
-
-      it('number', () => {
-        const val: JsonArrayH = [10];
-        expect(val).toEqual([10]);
-      });
-
-      it('boolean', () => {
-        const val: JsonArrayH = [true];
-        expect(val).toEqual([true]);
-      });
-
-      it('null', () => {
-        const val: JsonArrayH = [null];
-        expect(val).toEqual([null]);
-      });
-
-      it('Json', () => {
-        const val: JsonArrayH = [{ key: 'value', _hash: 'hash' }];
-        expect(val).toEqual([{ key: 'value', _hash: 'hash' }]);
-      });
-    });
-
-    describe('JsonH', () => {
-      it('string', () => {
-        const val: JsonH = { key: 'hello', _hash: 'hash' };
-        expect(val).toEqual({ key: 'hello', _hash: 'hash' });
-      });
-
-      it('number', () => {
-        const val: JsonH = { key: 10, _hash: 'hash' };
-        expect(val).toEqual({ key: 10, _hash: 'hash' });
-      });
-
-      it('boolean', () => {
-        const val: JsonH = { key: true, _hash: 'hash' };
-        expect(val).toEqual({ key: true, _hash: 'hash' });
-      });
-
-      it('null', () => {
-        const val: JsonH = { key: null, _hash: 'hash' };
-        expect(val).toEqual({ key: null, _hash: 'hash' });
-      });
-
-      it('JsonH', () => {
-        const val: JsonH = {
-          key: { key: 'value', _hash: 'hash' },
-          _hash: 'hash',
-        };
-        expect(val).toEqual({
-          key: { key: 'value', _hash: 'hash' },
-          _hash: 'hash',
-        });
-      });
-    });
-
-    describe('ExampleJsonH', () => {
-      it('provides an example json object with hashes', () => {
-        expect(exampleJsonH).toEqual({
-          a: { b: 1, _hash: 'hash1' },
-          _hash: 'hash0',
-        });
       });
     });
   });

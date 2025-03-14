@@ -2,8 +2,9 @@
  * The example function demonstrates how to use rljson/json
  */
 
-import { Json, JsonArray, JsonArrayH, JsonH, JsonValue, JsonValueH } from './json.ts';
-
+import { JsonArray, JsonArrayH } from './json-array.ts';
+import { JsonValue, JsonValueH } from './json-value.ts';
+import { Json, JsonH } from './json.ts';
 
 export const example = () => {
   const h1 = (val: any) => console.log('\n' + val);
