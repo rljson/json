@@ -7,11 +7,19 @@
 import { JsonArray, JsonArrayH } from './json-array.ts';
 import { Json, JsonH } from './json.ts';
 
+
 // .............................................................................
 /**
  * A value that can be assigned to a property in a json dictionary
  */
-export type JsonValue = string | number | boolean | null | Json | JsonArray;
+export type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | Json
+  | JsonArray
+  | undefined;
 
 // .............................................................................
 /**
@@ -22,6 +30,7 @@ export const jsonBasicValueTypes = [
   'number',
   'boolean',
   'null',
+  'undefined',
 ] as const;
 
 /**
@@ -78,6 +87,8 @@ export const jsonValueType = (value: JsonValue): JsonValueType => {
       return 'number';
     case 'boolean':
       return 'boolean';
+    case 'undefined':
+      return 'undefined';
     case 'object':
       if (value === null) return 'null';
       if (Array.isArray(value)) return 'jsonArray';
