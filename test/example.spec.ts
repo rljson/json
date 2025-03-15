@@ -10,6 +10,7 @@ import { example } from '../src/example';
 
 import { expectGolden } from './setup/goldens';
 
+
 describe('example', () => {
   it('should run without error', async () => {
     // Execute example
@@ -19,7 +20,7 @@ describe('example', () => {
     example();
 
     // Write golden file
-    expectGolden('example/log.txt').toBe(logMessages);
+    await expectGolden('example/log.txt').toBe(logMessages);
 
     // Restore console.log
     console.log = log;

@@ -7,14 +7,11 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  isBasicType,
-  jsonBasicValueTypes,
-  jsonComplexValueTypes,
-  jsonValueType,
-  jsonValueTypes,
-  validateJsonValue,
+  isBasicType, jsonBasicValueTypes, jsonComplexValueTypes, jsonValueType, jsonValueTypes,
+  validateJsonValue
 } from '../src/json-value.ts';
 import { exampleJsonObject } from '../src/json.ts';
+
 
 describe('JsonValue', () => {
   it('jsonBasicValueTypes', () => {
@@ -23,6 +20,7 @@ describe('JsonValue', () => {
       'number',
       'boolean',
       'null',
+      'undefined',
     ]);
   });
 
@@ -36,6 +34,7 @@ describe('JsonValue', () => {
       'number',
       'boolean',
       'null',
+      'undefined',
       'json',
       'jsonArray',
       'jsonValue',
@@ -54,6 +53,9 @@ describe('JsonValue', () => {
     });
     it('null', () => {
       expect(jsonValueType(null)).toBe('null');
+    });
+    it('undefined', () => {
+      expect(jsonValueType(undefined)).toBe('undefined');
     });
     it('json', () => {
       expect(jsonValueType({ key: 'value' })).toBe('json');

@@ -5,6 +5,7 @@
   "  Boolean: true",
   "  Null: null",
   "  Json: {\"a\":{\"b\":1}}",
+  "  Json: undefined",
   "\nJsonValueH deeply enforces _hash properties for Json dictionaries",
   "  JsonH: {\"a\":{\"b\":1,\"_hash\":\"hash1\"},\"_hash\":\"hash0\"}",
   "\nJsonArray is array of json values",
