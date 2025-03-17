@@ -6,5 +6,7 @@
 
 export * from './copy.ts';
 export * from './equals.ts';
+export * from './example.ts';
+export * from './json-array.ts';
 export * from './json-value.ts';
 export * from './json.ts';
