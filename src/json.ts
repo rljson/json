@@ -4,7 +4,7 @@
 // Use of this source code is governed by terms that can be
 // found in the LICENSE file in the root of this package.
 
-import { JsonValue, JsonValueH } from './json-value.ts';
+import { JsonValue, JsonValueH, JsonValueType } from './json-value.ts';
 
 /** A json data structure */
 export interface Json {
@@ -29,6 +29,9 @@ export const exampleJson: Readonly<ExampleJson> = { a: { b: 1 } };
 // .............................................................................
 // Example json values
 
+/**
+ * Returns an example json value containing all possible types
+ */
 export const exampleJsonObject = (): Json => {
   return {
     int: 5,
@@ -38,5 +41,22 @@ export const exampleJsonObject = (): Json => {
     null: null,
     jsonArray: [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
     json: { a: 1, b: { c: 2 } },
+    jsonValue: 3,
+  } as const;
+};
+
+/**
+ * Returns the intended Json value types for the fields of the exampleJsonObject
+ */
+export const exampleJsonObjectTypes = (): Record<string, JsonValueType> => {
+  return {
+    int: 'number',
+    double: 'number',
+    string: 'string',
+    boolean: 'boolean',
+    null: 'null',
+    jsonArray: 'jsonArray',
+    json: 'json',
+    jsonValue: 'jsonValue',
   } as const;
 };
