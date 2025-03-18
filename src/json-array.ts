@@ -14,14 +14,7 @@ export type JsonArray = Array<JsonValue>;
 export type JsonArrayH = Array<JsonValueH>;
 
 /**
- * Example json array
- * @returns An example json array
+ * Returns an example json array containing all values of the exampleJsonObject
  */
-export const exampleJsonArray = (): JsonArray => [
-  1,
-  'a',
-  true,
-  null,
-  [1, 'a', true, null, [1, 'a', true, null], { a: 1 }],
-  exampleJsonObject(),
-];
+export const exampleJsonArray = (): JsonArray =>
+  Object.values(exampleJsonObject());
