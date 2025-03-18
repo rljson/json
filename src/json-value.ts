@@ -120,6 +120,23 @@ export const validateJsonValue = (value: JsonValue): void => {
   }
 };
 
+/**
+ * Returns true, if a given value matches a given type
+ * @param value The value to be checked
+ * @param type The type to be checked
+ */
+export const jsonValueMatchesType = (
+  value: any,
+  type: JsonValueType,
+): boolean => {
+  try {
+    const typeIs = jsonValueType(value);
+    if (typeIs === type) return true;
+    if (type === 'jsonValue') return true;
+  } catch {}
+  return false;
+};
+
 // .............................................................................
 /** A deeply hashed JSON value */
 export type JsonValueH = string | number | boolean | null | JsonH | JsonArrayH;
