@@ -7,6 +7,10 @@
 import { JsonArray, JsonArrayH } from './json-array.ts';
 import { Json, JsonH } from './json.ts';
 
+/**
+ * A key in a json dictionary
+ */
+export type JsonKey = string;
 
 // .............................................................................
 /**
