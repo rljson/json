@@ -7,11 +7,15 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  isBasicType, jsonBasicValueTypes, jsonComplexValueTypes, jsonValueType, jsonValueTypes,
-  validateJsonValue
+  isBasicType,
+  jsonBasicValueTypes,
+  jsonComplexValueTypes,
+  jsonValueMatchesType,
+  jsonValueType,
+  jsonValueTypes,
+  validateJsonValue,
 } from '../src/json-value.ts';
 import { exampleJsonObject } from '../src/json.ts';
-
 
 describe('JsonValue', () => {
   it('jsonBasicValueTypes', () => {
@@ -108,6 +112,35 @@ describe('JsonValue', () => {
       expect(isBasicType(true)).toEqual(true);
       expect(isBasicType(false)).toEqual(true);
       expect(isBasicType(new Set())).toEqual(false);
+    });
+  });
+
+  describe('jsonValueMatchesType', () => {
+    describe('returns true ', () => {
+      it('if value matches type', () => {
+        expect(jsonValueMatchesType(1, 'number')).toEqual(true);
+        expect(jsonValueMatchesType(1.0, 'number')).toEqual(true);
+        expect(jsonValueMatchesType('1', 'string')).toEqual(true);
+        expect(jsonValueMatchesType(true, 'boolean')).toEqual(true);
+        expect(jsonValueMatchesType(false, 'boolean')).toEqual(true);
+        expect(jsonValueMatchesType({}, 'json')).toEqual(true);
+        expect(jsonValueMatchesType([], 'jsonArray')).toEqual(true);
+      });
+      describe('if the value is an arbitrary json value', () => {
+        it('and type is jsonValue', () => {
+          expect(jsonValueMatchesType(1, 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType(1.0, 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType('1', 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType(true, 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType(false, 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType({}, 'jsonValue')).toEqual(true);
+          expect(jsonValueMatchesType([], 'jsonValue')).toEqual(true);
+        });
+      });
+    });
+
+    it('returns false if value is not a JsonValue', () => {
+      expect(jsonValueMatchesType(new Set(), 'json')).toEqual(false);
     });
   });
 });
