@@ -13,7 +13,7 @@ import { expectGolden } from './setup/goldens.ts';
 
 describe('JsonArray', () => {
   it('exampleJsonArray()', () => {
-    expectGolden('exampleJsonArray').toBe(exampleJsonArray());
+    expectGolden('json-array/example-json-array.json').toBe(exampleJsonArray());
   });
 
   it('string', () => {
