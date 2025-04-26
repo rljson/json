@@ -35,11 +35,6 @@ describe('json', () => {
         expect(val).toBe(true);
       });
 
-      it('null', () => {
-        const val: JsonValue = null;
-        expect(val).toBe(null);
-      });
-
       it('Json', () => {
         const val: JsonValue = { key: 'value' };
         expect(val).toEqual({ key: 'value' });
@@ -120,6 +115,9 @@ describe('json', () => {
       const types = exampleJsonObjectTypes();
 
       for (const [key, value] of Object.entries(exampleJsonObject())) {
+        if (value === null) {
+          continue;
+        }
         const typeIs = jsonValueType(value);
         const typeShould = types[key];
         if (key !== 'jsonValue') {

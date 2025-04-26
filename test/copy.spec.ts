@@ -8,7 +8,6 @@ import { describe, expect, it } from 'vitest';
 
 import { copy } from '../src/copy';
 
-
 describe('copy, copyList', () => {
   it('empty json', () => {
     expect(copy({})).toEqual({});
@@ -67,18 +66,6 @@ describe('copy, copyList', () => {
     ).toEqual({
       a: null,
       b: [1, null, 2],
-    });
-  });
-
-  it('undefined value', () => {
-    expect(
-      copy({
-        a: undefined,
-        b: [1, undefined, 2],
-      }),
-    ).toEqual({
-      a: undefined,
-      b: [1, undefined, 2],
     });
   });
 

@@ -6,7 +6,6 @@ import { JsonArray, JsonArrayH } from './json-array.ts';
 import { JsonValue, JsonValueH } from './json-value.ts';
 import { Json, JsonH } from './json.ts';
 
-
 export const example = () => {
   const h1 = (val: any) => console.log('\n' + val);
   const kv = (key: string, val: any) => console.log('  ' + key + ': ' + val);
@@ -22,13 +21,7 @@ export const example = () => {
   jsonValue = true;
   kv('Boolean', jsonValue);
 
-  jsonValue = null;
-  kv('Null', jsonValue);
-
   jsonValue = { a: { b: 1 } };
-  kv('Json', JSON.stringify(jsonValue));
-
-  jsonValue = undefined;
   kv('Json', JSON.stringify(jsonValue));
 
   // .............................................................................
