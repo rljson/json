@@ -16,26 +16,13 @@ export type JsonKey = string;
 /**
  * A value that can be assigned to a property in a json dictionary
  */
-export type JsonValue =
-  | string
-  | number
-  | boolean
-  | null
-  | Json
-  | JsonArray
-  | undefined;
+export type JsonValue = string | number | boolean | Json | JsonArray;
 
 // .............................................................................
 /**
  * An array containing the basic json value types
  */
-export const jsonBasicValueTypes = [
-  'string',
-  'number',
-  'boolean',
-  'null',
-  'undefined',
-] as const;
+export const jsonBasicValueTypes = ['string', 'number', 'boolean'] as const;
 
 /**
  * Returns true if the value is a basic json value type
@@ -66,6 +53,11 @@ export const jsonComplexValueTypes = [
 export type JsonComplexValueType = (typeof jsonComplexValueTypes)[number];
 
 /**
+ * An array containing the json null value types
+ */
+export const jsonNullValueTypes = ['null', 'undefined'] as const;
+
+/**
  * An array containing all json value types
  */
 export const jsonValueTypes = [
@@ -91,10 +83,7 @@ export const jsonValueType = (value: JsonValue): JsonValueType => {
       return 'number';
     case 'boolean':
       return 'boolean';
-    case 'undefined':
-      return 'undefined';
     case 'object':
-      if (value === null) return 'null';
       if (Array.isArray(value)) return 'jsonArray';
       if (Object.getPrototypeOf(value) === Object.prototype) return 'json';
       throw new Error(
@@ -110,6 +99,10 @@ export const jsonValueType = (value: JsonValue): JsonValueType => {
  * @param value The json value to be validated
  */
 export const validateJsonValue = (value: JsonValue): void => {
+  if (value == null) {
+    return;
+  }
+
   const type = jsonValueType(value);
   if (jsonBasicValueTypes.includes(type as any)) {
     return;

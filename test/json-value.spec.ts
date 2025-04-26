@@ -19,13 +19,7 @@ import { exampleJsonObject } from '../src/json.ts';
 
 describe('JsonValue', () => {
   it('jsonBasicValueTypes', () => {
-    expect(jsonBasicValueTypes).toEqual([
-      'string',
-      'number',
-      'boolean',
-      'null',
-      'undefined',
-    ]);
+    expect(jsonBasicValueTypes).toEqual(['string', 'number', 'boolean']);
   });
 
   it('jsonComplexValueTypes', () => {
@@ -37,8 +31,6 @@ describe('JsonValue', () => {
       'string',
       'number',
       'boolean',
-      'null',
-      'undefined',
       'json',
       'jsonArray',
       'jsonValue',
@@ -54,12 +46,6 @@ describe('JsonValue', () => {
     });
     it('boolean', () => {
       expect(jsonValueType(true)).toBe('boolean');
-    });
-    it('null', () => {
-      expect(jsonValueType(null)).toBe('null');
-    });
-    it('undefined', () => {
-      expect(jsonValueType(undefined)).toBe('undefined');
     });
     it('json', () => {
       expect(jsonValueType({ key: 'value' })).toBe('json');
