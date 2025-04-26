@@ -69,6 +69,18 @@ describe('copy, copyList', () => {
     });
   });
 
+  it('undefined value', () => {
+    expect(
+      copy({
+        a: undefined,
+        b: [1, undefined, 2],
+      }),
+    ).toEqual({
+      a: undefined,
+      b: [1, undefined, 2],
+    });
+  });
+
   describe('throws', () => {
     describe('on unsupported type', () => {
       it('in map', () => {

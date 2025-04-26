@@ -8,7 +8,7 @@ import { JsonValue, JsonValueH } from './json-value.ts';
 import { exampleJsonObject } from './json.ts';
 
 /** An array that can be assigned to a property in a json dictionary */
-export type JsonArray = Array<JsonValue | null>;
+export type JsonArray = Array<JsonValue | null | undefined>;
 
 /** A deeply hashed JSON array */
 export type JsonArrayH = Array<JsonValueH>;

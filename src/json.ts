@@ -8,7 +8,7 @@ import { JsonValue, JsonValueH, JsonValueType } from './json-value.ts';
 
 /** A json data structure */
 export interface Json {
-  [key: string]: JsonValue | null;
+  [key: string]: JsonValue | null | undefined;
 }
 
 /** A deeply hashed JSON object */

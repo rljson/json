@@ -14,6 +14,8 @@ export const copy = <T extends Json>(json: T): T => {
   for (const [key, value] of Object.entries(json)) {
     if (value === null) {
       result[key] = null;
+    } else if (value === undefined) {
+      result[key] = undefined;
     } else if (Array.isArray(value)) {
       result[key] = copyList(value);
     } else if (isBasicType(value)) {
@@ -33,6 +35,8 @@ export const copyList = <T extends JsonArray>(list: JsonArray): T => {
   for (const element of list) {
     if (element === null) {
       result.push(null);
+    } else if (element === undefined) {
+      result.push(undefined);
     } else if (Array.isArray(element)) {
       result.push(copyList(element));
     } else if (isBasicType(element)) {
