@@ -1,6 +1,6 @@
 {
   "name": "@rljson/json",
-  "version": "0.0.19",
+  "version": "0.0.18",
   "description": "Basic json types, i. e. `Json`, `JsonValue`, `JsonArray`, ...",
   "homepage": "https://github.com/rljson/json",
   "bugs": "https://github.com/rljson/json/issues",
@@ -46,6 +46,7 @@
     "vitest": "^3.1.2",
     "vitest-dom": "^0.1.1"
   },
+  "dependencies": {},
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
