@@ -8,7 +8,7 @@ import { JsonValue, JsonValueH, JsonValueType } from './json-value.ts';
 
 /** A json data structure */
 export interface Json {
-  [key: string]: JsonValue;
+  [key: string]: JsonValue | null;
 }
 
 /** A deeply hashed JSON object */
@@ -48,13 +48,15 @@ export const exampleJsonObject = (): Json => {
 /**
  * Returns the intended Json value types for the fields of the exampleJsonObject
  */
-export const exampleJsonObjectTypes = (): Record<string, JsonValueType> => {
+export const exampleJsonObjectTypes = (): Record<
+  string,
+  JsonValueType | null
+> => {
   return {
     int: 'number',
     double: 'number',
     string: 'string',
     boolean: 'boolean',
-    null: 'null',
     jsonArray: 'jsonArray',
     json: 'json',
     jsonValue: 'jsonValue',

@@ -12,7 +12,10 @@ import { JsonValue } from './json-value.ts';
  * @param b - The second value to compare
  * @returns true if a and b are deeply equal
  */
-export const equals = (a: JsonValue, b: JsonValue): boolean => {
+export const equals = (
+  a: JsonValue | null | undefined,
+  b: JsonValue | null | undefined,
+): boolean => {
   if (a === b) {
     return true;
   }
