@@ -36,8 +36,8 @@ type TMerged<T> = [T] extends [Array<any>]
   ? TPartialKeys<{ [K in TAllKeys<T>]: TMerged<TIndexValue<T, K>> }, never>
   : T;
 
-// istanbul ignore next
-const isObject = (obj: any) => {
+/* v8 ignore next @preserve */
+export const isObject = (obj: any) => {
   if (typeof obj === 'object' && obj !== null) {
     if (typeof Object.getPrototypeOf === 'function') {
       const prototype = Object.getPrototypeOf(obj);
@@ -54,6 +54,7 @@ interface IObject {
   [key: string]: any;
 }
 
+/* v8 ignore next @preserve */
 export const merge = <T extends IObject[]>(...objects: T): TMerged<T[number]> =>
   objects.reduce((result, current) => {
     if (current === undefined) {
@@ -62,7 +63,7 @@ export const merge = <T extends IObject[]>(...objects: T): TMerged<T[number]> =>
 
     if (Array.isArray(current)) {
       throw new TypeError(
-        'Arguments provided to ts-deepmerge must be objects, not arrays.',
+        'Arguments provided to merge must be objects, not arrays.',
       );
     }
 
@@ -122,14 +123,17 @@ interface IOptions {
   uniqueArrayItems: boolean;
 }
 
+/* v8 ignore next @preserve */
 const defaultOptions: IOptions = {
   allowUndefinedOverrides: true,
   mergeArrays: true,
   uniqueArrayItems: true,
 };
 
+/* v8 ignore next @preserve */
 merge.options = defaultOptions;
 
+/* v8 ignore next @preserve */
 merge.withOptions = <T extends IObject[]>(
   options: Partial<IOptions>,
   ...objects: T
