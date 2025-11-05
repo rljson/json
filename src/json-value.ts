@@ -125,6 +125,7 @@ export const jsonValueMatchesType = (
   try {
     const typeIs = jsonValueType(value);
     if (typeIs === type) return true;
+    /* v8 ignore next @preserve */
     if (type === 'jsonValue') return true;
   } catch {}
   return false;

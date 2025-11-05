@@ -10,3 +10,4 @@ export * from './example.ts';
 export * from './json-array.ts';
 export * from './json-value.ts';
 export * from './json.ts';
+export * from './merge.ts';
